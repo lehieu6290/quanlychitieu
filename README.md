@@ -1,4 +1,4 @@
-# Phần mêm Quản lý chi tiêu
+# Phần mềm Quản lý chi tiêu
 Đây là phần mềm ghi lại những khoản chi tiêu và thu nhập hằng ngày. Sử dụng AsyncStogare để lưu trữ cục bộ trên điện thoại.
 
 ## Màn hình hiển thị danh sách các khoản chi tiêu hằng ngày
