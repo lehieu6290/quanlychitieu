@@ -57,16 +57,27 @@ const ItemForm = ({ setEditFormVisible, setIsUpdated, selectedItem, keyDate, typ
         setMoneyValue(convertToMoneyString(money));
     }, [money]);
 
+    function handleMoneyTextChange(text){
+        if(text){
+            const stringSplitted = text.split('.');
+            const textNumericValue = stringSplitted.join('');
+
+            if(/\d+/.test(textNumericValue)){
+                setMoney(textNumericValue);
+                console.log(money);
+                setMoneyError("");
+            }
+        }else{
+            setMoney(0);
+        }
+    }
+
     function handleUpdateItem(){
         if(title !== "" && money !== ""){
             if(id){
                 updateItem(id, { title, money }, keyDate, type);
             }else{
-                // if(keyDate != null){
-                //     insertItem(keyDate, { title, money });
-                // }else{
-                insertItem(convertDatePickerToKey(date), { title, money }, type)
-                // }
+                insertItem(convertDatePickerToKey(date), { title, money }, type);
             }
 
             setIsUpdated(true);
@@ -113,7 +124,7 @@ const ItemForm = ({ setEditFormVisible, setIsUpdated, selectedItem, keyDate, typ
                         </View>
                         <View>
                             <Text style={ styles.title }>Số tiền</Text>
-                            <TextInput style={ styles.input } keyboardType="numeric" value={ convertToMoneyString(money) } onChangeText={ (text) => { setMoney(convertToMoneyNumber(text)); setMoneyError("") } } />
+                            <TextInput style={ styles.input } keyboardType="numeric" value={ convertToMoneyString(money) } onChangeText={ (text) => { handleMoneyTextChange(text) } } />
                             <Text style={ styles.error }>{ moneyError }</Text>
                         </View>
                         { showDateField &&
