@@ -64,7 +64,6 @@ const ItemForm = ({ setEditFormVisible, setIsUpdated, selectedItem, keyDate, typ
 
             if(/\d+/.test(textNumericValue)){
                 setMoney(textNumericValue);
-                console.log(money);
                 setMoneyError("");
             }
         }else{

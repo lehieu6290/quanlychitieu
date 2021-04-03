@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
 import { convertToMoneyString } from '../utils/Money';
 
@@ -15,6 +15,27 @@ const CardItem = ({ item, setEditFormVisible, setSelectedItem, deleteItem }) => 
         deleteItem(id);
     }
 
+    function showDeleteAlert(){
+        Alert.alert(
+            "Thông báo",
+            "Bạn có chắc muốn xóa?",
+            [
+                {
+                    text: "Hủy"
+                },
+                {
+                    text: "Xóa",
+                    onPress: () => {
+                        handleDeleteItem();
+                    }
+                }
+            ],
+            {
+                cancelable: true
+            }
+        );
+    }
+
     return (
         <View style={ styles.container }>
             <View style={ styles.left }>
@@ -25,7 +46,7 @@ const CardItem = ({ item, setEditFormVisible, setSelectedItem, deleteItem }) => 
                 <TouchableOpacity style={ { ...styles.button, marginBottom: 5 } } onPress={ () => handleSetSelectedItem() }>
                     <Image style={ styles.icon } source={ require('../images/edit.png') } />
                 </TouchableOpacity>
-                <TouchableOpacity style={ { ...styles.button, marginTop: 5 } } onPress={ () => handleDeleteItem() }>
+                <TouchableOpacity style={ { ...styles.button, marginTop: 5 } } onPress={ showDeleteAlert }>
                     <Image style={ styles.icon } source={ require('../images/trash.png') } />
                 </TouchableOpacity>
             </View>
